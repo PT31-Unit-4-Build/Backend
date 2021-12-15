@@ -1,8 +1,8 @@
 const db = require('../data/db-config')
 
 module.exports = {
-    add,
-    find,
+    insertUser,
+    getAllUsers,
     findBy,
     findById,
 }
@@ -15,11 +15,6 @@ async function insertUser(user) {
     // UNLIKE SQLITE WHICH FORCES US DO DO A 2ND DB CALL
     const [newUserObject] = await db('users').insert(user, ['user_id', 'username', 'password'])
     return newUserObject // { user_id: 7, username: 'foo', password: 'xxxxxxx' }
-}
-
-
-function find() {
-
 }
 
 function findBy(filter) {
