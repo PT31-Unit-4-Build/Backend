@@ -26,9 +26,9 @@ const update = (id, changes) => {
 
 
 module.exports = {
-find,
-findBy,
+findAll,
 findById,
+deleteById,
 add,
-delete,
+update,
 }
