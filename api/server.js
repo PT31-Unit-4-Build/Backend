@@ -1,14 +1,17 @@
 const express = require('express')
 const helmet = require('helmet')
 const cors = require('cors')
-const db = require('./data/db-config')
 require('colors')
+
+const authRouter = require('../api/auth/auth-router')
 
 
 const server = express()
 server.use(express.json())
 server.use(helmet())
 server.use(cors())
+
+server.use('/api/auth', authRouter)
 
 server.get('/',  (req, res) => {
   res.status(200).json({
@@ -23,9 +26,5 @@ server.use((err, req, res, next) => { // eslint-disable-line
   })
 })
 
-
-// server.post('/api/users', async (req, res) => {
-//   res.status(201).json(await insertUser(req.body))
-// })
 
 module.exports = server
