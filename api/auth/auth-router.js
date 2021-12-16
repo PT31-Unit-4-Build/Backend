@@ -4,9 +4,12 @@ const bcrypt = require('bcryptjs')
 const { insertUser } = require('../users/users-model')
 const checkUsernameExists = require('../middleware/checkUsernameExists')
 const checkMissingCredentials = require('../middleware/checkMissingCredentials')
+const correctBodyStructure = require('../middleware/correctBodyStructure')
+const checkUsernameFree = require('../middleware/checkUsernameFree')
+const checkPhoneNumberFree = require('../middleware/checkPhoneNumberFree')
 
 
-router.post('/register',  (req, res, next) => {
+router.post('/register', correctBodyStructure, checkUsernameFree, checkPhoneNumberFree, (req, res, next) => {
 
     let user = req.body
     const rounds = process.env.BCRYPT_ROUNDS || 8;
