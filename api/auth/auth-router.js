@@ -20,6 +20,7 @@ router.post('/register',  (req, res, next) => {
                 id: saved, 
                 username: saved.username,
                 password: saved.password,
+                phoneNumber: saved.phoneNumber,
             })
         })
         .catch(next)
