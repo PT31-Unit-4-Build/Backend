@@ -1,22 +1,27 @@
 const db = require('../data/db-config')
 
-function find() {
-    return db('plants')
+// find all plants 
+function findAll() {
+    return db('plants').orderBy('plants.id')
 }
-function findBy(filter) {
-    return db('plants').where(filter)
-}
+// find plant by ID
 function findById(id) {
     return db('plants')
     .where('p.id', id)
     .first()
 }
-// function deleteById(id) {
-//     return db('plants')
-// }
+// delete Plant
+function deleteById(id) {
+    return db('plants').where({ id }).del()
+}
+// add a plant
 async function add(plant) {
     const[id] = await db('plants').insert(plant)
     return findById(id)
+}
+// update plant
+const update = (id, changes) => {
+    return db('plants').where({ id }).update(changes)
 }
 
 
