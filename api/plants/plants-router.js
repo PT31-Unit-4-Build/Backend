@@ -11,7 +11,7 @@ const plant = await Plant.findAll()
         next({
             status: 500,
             message: 'Error getting Plants!',
-            ...err
+            ...err,
         })
     }
 })
