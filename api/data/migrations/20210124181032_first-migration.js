@@ -16,28 +16,28 @@ exports.up = async (knex) => {
     plants.string('image')
   })
 
-  .createTable('users_plants', (users_plants) => {
-    users_plants.increments()
-    users_plants.integer()
-      .unsigned()
-      .notNullable()
-      .references('user_id')
-      .inTable('users')
-      .onDelete('CASCADE')
-      .onUpdate('CASCADE')
-      users_plants.integer('plant_id')
-      .unsigned()
-      .notNullable()
-      .references('id')
-      .inTable('plants')
-      .onDelete('CASCADE')
-      .onUpdate('CASCADE')
-  })
+  // .createTable('users_plants', (users_plants) => {
+  //   users_plants.increments()
+  //   users_plants.integer('users_plant_id')
+  //     .unsigned()
+  //     .notNullable()
+  //     .references('user_id')
+  //     .inTable('users')
+  //     .onDelete('CASCADE')
+  //     .onUpdate('CASCADE')
+  //     users_plants.integer('plant_id')
+  //     .unsigned()
+  //     .notNullable()
+  //     .references('id')
+  //     .inTable('plants')
+  //     .onDelete('CASCADE')
+  //     .onUpdate('CASCADE')
+  // })
 }
 exports.down = async (knex) => {
 
   await knex.schema
-  .dropTableIfExists('users_plants')
+  // .dropTableIfExists('users_plants')
   .dropTableIfExists('plants')
   .dropTableIfExists('users')
 }
