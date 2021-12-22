@@ -16,6 +16,16 @@ const plant = await Plant.findAll()
     }
 })
 
+// get plant by id
+router.get('/:id', async (req, res, next) => {
+    try {
+const plant = await Plant.findById(req.params.id)
+        res.status(200).json(plant)
+    } catch(err) {
+        next(err)
+    }
+})
+
 // add a plant 
 router.post('/', async (req, res, next) => {
     try {
