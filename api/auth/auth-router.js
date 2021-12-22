@@ -47,22 +47,6 @@ router.post('/login', checkUsernameExists, checkMissingCredentials, (req, res, n
     
 })
 
-// router.post('/login', checkUsernameExists, checkMissingCredentials, async (req, res, next) => {
-//     const { username, password } = req.body
-//     try {
-//         const [user] = await findBy({ username }) 
-//         if(user && bcrypt.compareSync(password, user.password)) {
-//             const token = generateToken(user)
-//             res.status(200).json({
-//                 token: token
-//             })
-//         } else {
-//             res.status(400).json({ message: 'Invalid login credentials' })
-//         }
-//     } catch(err) {
-//         next(err)
-//     }
-// })
 
 
 
