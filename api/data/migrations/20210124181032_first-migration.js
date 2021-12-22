@@ -1,13 +1,12 @@
-exports.up = async (knex) => {
-  await knex.schema
+exports.up = function (knex) {
+  return knex.schema
     .createTable('users', (tbl) => {
       tbl.increments()
       tbl.string('username', 200).notNullable().unique()
       tbl.string('password', 200).notNullable()
-      tbl.string('phoneNumber', 10).notNullable().unique()
+      tbl.string('phoneNumber', 10).notNullable()
       tbl.timestamps(false, true)
     })
-
     .createTable('plants', (tbl) => {
       tbl.increments()
       tbl.string('nickname')
@@ -35,7 +34,6 @@ exports.up = async (knex) => {
 
 }
 exports.down = function (knex) {
-
   return knex.schema
     .dropTableIfExists('users_plants')
     .dropTableIfExists('plants')
