@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 
 module.exports = (user) => {
     const payload = {
-        subject: user.id,
+        subject: user.user_id,
         username: user.username,
         phoneNumber: user.phoneNumber,
     }
