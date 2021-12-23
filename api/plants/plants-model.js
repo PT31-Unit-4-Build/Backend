@@ -2,17 +2,18 @@ const db = require('../data/db-config')
 
 // find all plants 
 function findAll() {
-    return db('plants').orderBy('plants.id')
+    return db('plants').select('*')
 }
 // find plant by ID
 function findById(id) {
-    return db('plants')
-    .where('p.id', id)
+    return db('plants as p')
+    .where('plant_id', id)
+    .select('p.nickname', 'p.species', 'p.h2o_frequency')
     .first()
 }
 // delete Plant
-function deleteById(id) {
-    return db('plants').where({ id }).del()
+async function deleteById(plant_id) {
+    return db('plants').where({ plant_id }).del()
 }
 // add a plant
 async function add(plant) {
@@ -20,8 +21,9 @@ async function add(plant) {
     return findById(id)
 }
 // update plant
-const update = (id, changes) => {
-    return db('plants').where({ id }).update(changes)
+const update = async(plant_id, changes) => {
+    await db('plants').where({ plant_id }).update(changes)
+    return findById(plant_id)
 }
 
 

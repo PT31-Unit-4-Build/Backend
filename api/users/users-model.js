@@ -9,6 +9,11 @@ module.exports = {
 
 function getAllUsers() { return db('users') }
 
+function findById(id) {
+    return db('users')
+        .where('id', id)
+        .first()
+} 
 // async function insertUser(user) {
 //     // WITH POSTGRES WE CAN PASS A "RETURNING ARRAY" AS 2ND ARGUMENT TO knex.insert/update
 //     // AND OBTAIN WHATEVER COLUMNS WE NEED FROM THE NEWLY CREATED/UPDATED RECORD 
@@ -26,8 +31,4 @@ function findBy(filter) {
     return db('users').where(filter)
 }
 
-function findById(id) {
-    return db('users')
-        .where('id', id)
-        .first()
-} 
+

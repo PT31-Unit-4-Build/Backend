@@ -1,11 +1,30 @@
-exports.seed = function (knex) {
-    return knex('users') 
-    .del()
-    .then(function(){
-        return knex('users').insert([
-            { id: 1, username: 'user', phoneNumber: '1234567890', password: '1234'},
-            { id: 2, username: 'thom herz', phoneNumber: '1234567891', password: '1234'},
-            { id: 3, username: 'amber herz', phoneNumber: '1234567892', password: '1234'},
-        ])
-    })
+const bcrypt = require('bcryptjs')
+// exports.seed = function (knex) {
+//     // Deletes ALL existing entries
+//     return knex('users').del()
+//         .then(function () {
+//             // Inserts seed entries
+//             return knex('users').insert([
+//                 {
+//                     user_id: 1,
+//                     username: 'AdminUser',
+//                     // password: '1234',
+//                     password: bcrypt.hash('1234', 8),
+//                     phoneNumber: '1234567890'
+//                 },
+
+//             ]);
+//         });
+// };
+
+
+exports.seed = async function (knex) {
+    return knex('users').insert([
+        {
+            user_id: 1,
+            username: 'AdminUser',
+            password: await bcrypt.hash('1234', 8),
+            phoneNumber: '1234567890'
+        }
+    ])
 }
