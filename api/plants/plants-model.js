@@ -2,7 +2,7 @@ const db = require('../data/db-config')
 
 // find all plants 
 function findAll() {
-    return db('plants').orderBy('plants.id')
+    return db('plants').select('*')
 }
 // find plant by ID
 function findById(id) {
