@@ -23,6 +23,6 @@ function findBy(filter) {
 
 function findById(id) {
     return db('users')
-        .where('id', id)
+        .where('user_id', id)
         .first()
 } 

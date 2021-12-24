@@ -11,8 +11,8 @@ function findById(id) {
     .first()
 }
 // delete Plant
-function deleteById(id) {
-    return db('plants').where({ id }).del()
+function deleteById(plant_id) {
+    return db('plants').where({ plant_id }).del()
 }
 // add a plant
 async function add(plant) {
@@ -20,8 +20,8 @@ async function add(plant) {
     return findById(id)
 }
 // update plant
-const update = (id, changes) => {
-    return db('plants').where({ id }).update(changes)
+const update = (plant_id, changes) => {
+    return db('plants').where({ plant_id }).update(changes)
 }
 
 
