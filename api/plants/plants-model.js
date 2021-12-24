@@ -15,8 +15,8 @@ function deleteById(plant_id) {
     return db('plants').where({ plant_id }).del()
 }
 // add a plant
-async function add(plant) {
-    const[id] = await db('plants').insert(plant)
+const addPlant = async (plant) => {
+    const [id] = await db('plants').insert(plant)
     return findById(id)
 }
 // update plant
@@ -29,6 +29,6 @@ module.exports = {
 findAll,
 findById,
 deleteById,
-add,
+addPlant,
 update,
 }

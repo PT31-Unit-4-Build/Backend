@@ -1,9 +1,10 @@
 const router = require('express').Router()
+const restricted = require('../middleware/restricted')
 const Plant = require('../plants/plants-model')
 
 
 // get all plants 
-router.get('/', async (req, res, next) => {
+router.get('/', restricted, async (req, res, next) => {
     try {
         const plant = await Plant.findAll()
         res.json(plant)
@@ -38,7 +39,7 @@ router.get('/:id', (req, res, next) => {
 // add a plant 
 router.post('/', async (req, res, next) => {
     try {
-        let plant = await Plant.add(req.body)
+        let plant = await Plant.addPlant(req.body)
         res.status(201).json(plant)
     } catch (err) {
         next({
@@ -48,6 +49,16 @@ router.post('/', async (req, res, next) => {
         })
     }
 })
+
+// router.post('/', (req, res, next) => {
+//     Plant.add(req.body)
+//         .then(plant => {
+//             res.status(201).json(plant)
+//         })
+//         .catch(err => {
+//             next(err)
+//         })
+// })
 
 // edit a plant
 router.put('/:id', (req, res, next) => {
