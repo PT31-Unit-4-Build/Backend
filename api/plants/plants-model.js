@@ -7,7 +7,7 @@ function findAll() {
 // find plant by ID
 function findById(id) {
     return db('plants')
-    .where('p.id', id)
+    .where('plant_id', id)
     .first()
 }
 // delete Plant
