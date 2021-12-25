@@ -3,17 +3,19 @@ const helmet = require('helmet')
 const cors = require('cors')
 require('colors')
 
-const authRouter = require('../api/auth/auth-router')
-const plantsRouter = require('../api/plants/plants-router')
-
+const AuthRouter = require('../api/auth/auth-router')
+const User = require('../api/users/user-router')
+const PlantsRouter = require('../api/plants/plants-router')
 
 const server = express()
+
 server.use(express.json())
 server.use(helmet())
 server.use(cors())
 
-server.use('/api/auth', authRouter)
-server.use('/api/plants', plantsRouter)
+server.use('/api/auth', AuthRouter)
+server.use('/api/plants', PlantsRouter)
+server.use('/api/users', User)
 
 server.get('/',  (req, res) => {
   res.status(200).json({

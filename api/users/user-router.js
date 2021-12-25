@@ -2,11 +2,11 @@ const router = require('express').Router()
 // const restricted = require('../middleware/restricted') need to test endpoints first
 
 
-const User = require('../users/users-model')
+const Users = require('../users/users-model')
 
 // get all users
 router.get('/', (req, res, next) => {
-    User.getAllUsers()
+    Users.getAllUsers()
         .then(user => {
             if (!user) {
                 res.status(400).json({
@@ -24,7 +24,7 @@ router.get('/', (req, res, next) => {
 // get user by id
 router.get('/:id', (req, res, next) => {
     const { id } = req.params
-    User.findById(id) 
+    Users.findById(id) 
         .then(user => {
             if(user) {
                 res.status(200).json(user)
@@ -44,7 +44,7 @@ router.put('/:id', (req, res, next) => {
     const { id } = req.params
     const changes = req.body
 
-    User.editUser(id, changes)
+    Users.editUser(id, changes)
         .then(user => {
             if(user) {
                 res.json(user)
@@ -58,3 +58,5 @@ router.put('/:id', (req, res, next) => {
             next(err)
         })
 })
+
+module.exports = router
