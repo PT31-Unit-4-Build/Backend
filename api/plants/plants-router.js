@@ -1,10 +1,9 @@
 const router = require('express').Router()
-const restricted = require('../middleware/restricted')
 const Plant = require('../plants/plants-model')
 
 
 // get all plants 
-router.get('/', restricted, async (req, res, next) => {
+router.get('/', async (req, res, next) => {
     try {
         const plant = await Plant.findAll()
         res.json(plant)
@@ -18,6 +17,14 @@ router.get('/', restricted, async (req, res, next) => {
 })
 
 // get plant by id
+// router.get('/:id', async (req, res, next) => {
+//     try {
+// const plant = await Plant.findById(req.params.id)
+//         res.status(200).json(plant)
+//     } catch(err) {
+//         next(err)
+//     }
+
 router.get('/:id', (req, res, next) => {
     const { id } = req.params
     Plant.findById(id)
@@ -39,7 +46,7 @@ router.get('/:id', (req, res, next) => {
 // add a plant 
 router.post('/', async (req, res, next) => {
     try {
-        let plant = await Plant.addPlant(req.body)
+        let plant = await Plant.add(req.body)
         res.status(201).json(plant)
     } catch (err) {
         next({
@@ -49,16 +56,6 @@ router.post('/', async (req, res, next) => {
         })
     }
 })
-
-// router.post('/', (req, res, next) => {
-//     Plant.add(req.body)
-//         .then(plant => {
-//             res.status(201).json(plant)
-//         })
-//         .catch(err => {
-//             next(err)
-//         })
-// })
 
 // edit a plant
 router.put('/:id', (req, res, next) => {
@@ -90,7 +87,7 @@ router.delete('/:id', (req, res, next) => {
             } else {
                 next({
                     status: 404,
-                    message: 'Plant not found '
+                    message: 'Plant not found ',
                 })
             }
         })
