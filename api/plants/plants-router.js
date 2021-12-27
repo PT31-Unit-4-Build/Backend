@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const Plant = require('../plants/plants-model')
+const restricted = require('../middleware/restricted')
 
 
 // get all plants 
-router.get('/', async (req, res, next) => {
+router.get('/', restricted, async(req, res, next) => {
     try {
         const plant = await Plant.findAll()
         res.json(plant)
@@ -16,16 +17,7 @@ router.get('/', async (req, res, next) => {
     }
 })
 
-// get plant by id
-// router.get('/:id', async (req, res, next) => {
-//     try {
-// const plant = await Plant.findById(req.params.id)
-//         res.status(200).json(plant)
-//     } catch(err) {
-//         next(err)
-//     }
-
-router.get('/:id', (req, res, next) => {
+router.get('/:id', restricted, (req, res, next) => {
     const { id } = req.params
     Plant.findById(id)
         .then(plant => {
@@ -44,7 +36,7 @@ router.get('/:id', (req, res, next) => {
 })
 
 // add a plant 
-router.post('/', async (req, res, next) => {
+router.post('/', restricted, async(req, res, next) => {
     try {
         let plant = await Plant.add(req.body)
         res.status(201).json(plant)
@@ -58,7 +50,7 @@ router.post('/', async (req, res, next) => {
 })
 
 // edit a plant
-router.put('/:id', (req, res, next) => {
+router.put('/:id', restricted, (req, res, next) => {
     const { id } = req.params
     const changes = req.body
 
@@ -78,7 +70,7 @@ router.put('/:id', (req, res, next) => {
         })
 })
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', restricted, (req, res, next) => {
     const plant = req.params.id
     Plant.deleteById(plant)
         .then(count => {
